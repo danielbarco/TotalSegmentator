@@ -53,21 +53,14 @@ def setup_nnunet():
 def setup_totalseg(totalseg_id=None):
     totalseg_dir = get_totalseg_dir()
     totalseg_dir.mkdir(exist_ok=True)
-    totalseg_config_file = totalseg_dir / "config.json"
+ 
+    totalseg_id = "totalseg_" + ''.join(random.Random().choices(string.ascii_uppercase + string.digits, k=8))
+    config = {
+        "totalseg_id": totalseg_id,
+        "send_usage_stats": False,
+        "prediction_counter": 0
+    }
 
-    if totalseg_config_file.exists():
-        with open(totalseg_config_file) as f:
-            config = json.load(f)
-    else:
-        if totalseg_id is None:
-            totalseg_id = "totalseg_" + ''.join(random.Random().choices(string.ascii_uppercase + string.digits, k=8))
-        config = {
-            "totalseg_id": totalseg_id,
-            "send_usage_stats": True,
-            "prediction_counter": 0
-        }
-        with open(totalseg_config_file, "w") as f:
-            json.dump(config, f, indent=4)
 
     return config
 
