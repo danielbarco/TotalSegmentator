@@ -60,8 +60,6 @@ def setup_totalseg(totalseg_id=None):
         "send_usage_stats": False,
         "prediction_counter": 0
     }
-
-
     return config
 
 
