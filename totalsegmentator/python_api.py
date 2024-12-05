@@ -120,9 +120,9 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
     if license_number is not None:
         set_license_number(license_number)
 
-    if not get_config_key("statistics_disclaimer_shown"):  # Evaluates to True is variable not set (None) or set to False
-        print("TotalSegmentator sends anonymous usage statistics. If you want to disable it check the documentation.")
-        set_config_key("statistics_disclaimer_shown", True)
+    # if not get_config_key("statistics_disclaimer_shown"):  # Evaluates to True is variable not set (None) or set to False
+    #     print("TotalSegmentator sends anonymous usage statistics. If you want to disable it check the documentation.")
+    #     set_config_key("statistics_disclaimer_shown", True)
 
     from totalsegmentator.nnunet import nnUNet_predict_image  # this has to be after setting new env vars
 
