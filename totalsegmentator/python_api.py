@@ -116,7 +116,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         print("\nIf you use this tool please cite: https://pubs.rsna.org/doi/10.1148/ryai.230024\n")
 
     setup_nnunet()
-    setup_totalseg()
+    # setup_totalseg()
     # if license_number is not None:
     #     set_license_number(license_number)
 
