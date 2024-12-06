@@ -13,8 +13,8 @@ import torch
 from totalsegmentator.statistics import get_basic_statistics, get_radiomics_features_for_entire_dir
 from totalsegmentator.libs import download_pretrained_weights
 from totalsegmentator.config import setup_nnunet, setup_totalseg, increase_prediction_counter
-from totalsegmentator.config import send_usage_stats, set_license_number, has_valid_license_offline
-from totalsegmentator.config import get_config_key, set_config_key
+# from totalsegmentator.config import send_usage_stats, set_license_number, has_valid_license_offline
+# from totalsegmentator.config import get_config_key, set_config_key
 from totalsegmentator.map_to_binary import class_map
 from totalsegmentator.map_to_total import map_to_total
 import re
@@ -43,25 +43,25 @@ def convert_device_to_cuda(device):
         return f"cuda:{device.split(':')[1]}"
 
 
-def show_license_info():
-    status, message = has_valid_license_offline()
-    if status == "missing_license":
-        # textwarp needed to remove the indentation of the multiline string
-        print(textwrap.dedent("""\
-              In contrast to the other tasks this task is not openly available.
-              It requires a license. For non-commercial usage a free license can be
-              acquired here:
-              https://backend.totalsegmentator.com/license-academic/
+# def show_license_info():
+#     status, message = has_valid_license_offline()
+#     if status == "missing_license":
+#         # textwarp needed to remove the indentation of the multiline string
+#         print(textwrap.dedent("""\
+#               In contrast to the other tasks this task is not openly available.
+#               It requires a license. For non-commercial usage a free license can be
+#               acquired here:
+#               https://backend.totalsegmentator.com/license-academic/
 
-              For commercial usage contact: jakob.wasserthal@usb.ch
-              """))
-        sys.exit(1)
-    elif status == "invalid_license":
-        print(message)
-        sys.exit(1)
-    elif status == "missing_config_file":
-        print(message)
-        sys.exit(1)
+#               For commercial usage contact: jakob.wasserthal@usb.ch
+#               """))
+#         sys.exit(1)
+#     elif status == "invalid_license":
+#         print(message)
+#         sys.exit(1)
+#     elif status == "missing_config_file":
+#         print(message)
+#         sys.exit(1)
 
 
 def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Path, None]=None, ml=False, nr_thr_resamp=1, nr_thr_saving=6,
@@ -117,8 +117,8 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
 
     setup_nnunet()
     setup_totalseg()
-    if license_number is not None:
-        set_license_number(license_number)
+    # if license_number is not None:
+    #     set_license_number(license_number)
 
     # if not get_config_key("statistics_disclaimer_shown"):  # Evaluates to True is variable not set (None) or set to False
     #     print("TotalSegmentator sends anonymous usage statistics. If you want to disable it check the documentation.")
@@ -309,7 +309,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task vertebrae_body does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "heartchambers_highres":
         task_id = 301
         resample = None
@@ -319,7 +319,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task heartchambers_highres does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "appendicular_bones":
         task_id = 304
         resample = 1.5
@@ -328,7 +328,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task appendicular_bones does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "tissue_types":
         task_id = 481
         resample = 1.5
@@ -337,7 +337,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task tissue_types does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "tissue_types_mr":
         task_id = 734
         resample = 1.5
@@ -346,7 +346,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task tissue_types_mr does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "face":
         task_id = 303
         resample = 1.5
@@ -355,7 +355,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task face does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "face_mr":
         task_id = 737
         resample = 1.5
@@ -364,7 +364,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres"
         folds = [0]
         if fast: raise ValueError("task face_mr does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "brain_structures":
         task_id = 409
         resample = [1.0, 0.5, 0.5]
@@ -374,7 +374,7 @@ def totalsegmentator(input: Union[str, Path, Nifti1Image], output: Union[str, Pa
         model = "3d_fullres_high"
         folds = [0]
         if fast: raise ValueError("task brain_structures does not work with option --fast")
-        show_license_info()
+        # show_license_info()
     elif task == "test":
         task_id = [517]
         resample = None
